@@ -116,13 +116,15 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 DbInitializer.DbStart(app);
 
+// Swagger habilitado en todos los entornos para poder probar la API desde la URL de Azure
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// En el contenedor la app escucha solo HTTP (8080); el TLS lo termina Azure App Service
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseHttpsRedirection();
 }
-
-app.UseHttpsRedirection();
 
 app.UseCors("AllowFront");
 
