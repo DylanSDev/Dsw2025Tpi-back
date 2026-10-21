@@ -2,14 +2,14 @@ name: Build and Deploy to Azure App Service
 
 on:
   push:
-    branches: [development, main]
+    branches: [dev, master]
   pull_request:
-    branches: [development, main]
+    branches: [dev, master]
   workflow_dispatch:
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  IMAGE_NAME: dsw2025tpi-api
+  IMAGE_NAME: dsw2025tpi-back
 
 jobs:
   build-and-deploy:
